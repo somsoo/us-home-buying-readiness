@@ -1,28 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home Buying &amp; Down Payment Calculator - Under maintenance</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="This tool is temporarily offline while it is rebuilt.">
+<title>Home Buying Readiness Calculator</title>
+<meta name="description" content="Assess mortgage qualification, 28/36 DTI ratio, and down payment readiness.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://us-home-buying-readiness.enjoy-onepage.com/">
+<meta name="theme-color" content="#0284c7">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Home Buying Readiness Calculator">
+<meta property="og:title" content="Home Buying Readiness Calculator">
+<meta property="og:description" content="Assess mortgage qualification, 28/36 DTI ratio, and down payment readiness.">
+<meta property="og:url" content="https://us-home-buying-readiness.enjoy-onepage.com/">
+<meta property="og:image" content="https://us-home-buying-readiness.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Home Buying Readiness Calculator">
+<meta name="twitter:description" content="Assess mortgage qualification, 28/36 DTI ratio, and down payment readiness.">
+<meta name="twitter:image" content="https://us-home-buying-readiness.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="Home Buying Readiness RSS" href="https://us-home-buying-readiness.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://us-home-buying-readiness.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://us-home-buying-readiness.enjoy-onepage.com/#webapp",
+      "name": "Home Buying Readiness Calculator",
+      "url": "https://us-home-buying-readiness.enjoy-onepage.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "description": "An underwriting diagnostic calculator assessing buyer mortgage readiness, front/back DTI limits, closing reserves, and down payment feasibility.",
+      "image": "https://us-home-buying-readiness.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://us-home-buying-readiness.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the 28/36 Debt-to-Income (DTI) rule?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lenders prefer that your housing costs (PITI) do not exceed 28% of gross monthly income (front-end DTI), and total debt obligations including cars and loans do not exceed 36% (back-end DTI)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much cash should I keep after closing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lenders and financial planners recommend retaining at least 2 to 3 months of full mortgage payments (PITI) in liquid cash reserves after paying the down payment and closing costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What credit score is required to buy a house?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Conventional mortgages typically require a minimum 620 credit score (740+ for prime rates). FHA loans allow scores as low as 580 with a 3.5% down payment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my sensitive personal financial information protected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All income, credit tiers, and debt calculations run 100% client-side inside your web browser. No financial data is ever transmitted to servers or credit bureaus."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- ADSENSE START: loader -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+<!-- ADSENSE END: loader -->
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.4rem; margin: 0 0 12px; }
-  p { line-height: 1.6; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+:root{--bg:#f0f9ff;--card:#fff;--ink:#0f172a;--muted:#475569;--accent:#0284c7;--accent-hover:#0369a1;--line:#e0f2fe;--ok:#16a34a;--warn:#d97706;--danger:#dc2626}
+*{box-sizing:border-box}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-wrap:anywhere}
+.header{background:linear-gradient(135deg,#0369a1,#0284c7);color:#fff;text-align:center;padding:26px 16px 22px}
+.header h1{margin:0;font-size:1.7rem}
+.header-sub{opacity:.92;margin-top:6px;font-size:.95rem}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 14px 8px}
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:1024px){.grid2{grid-template-columns:7fr 5fr;align-items:start}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 3px rgba(15,23,42,.04)}
+.card h2{margin:0 0 10px;font-size:1.15rem;color:var(--ink)}
+.lbl{display:block;font-size:.84rem;font-weight:600;color:var(--muted);margin-bottom:4px}
+.input{width:100%;padding:9px 11px;border:1px solid #cbd5e1;border-radius:8px;font-size:.92rem;background:#fff;color:var(--ink)}
+.input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.form-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:640px){.form-grid{grid-template-columns:repeat(2,1fr)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;border:1px solid transparent;transition:background-color .15s}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-hover)}
+.btn.sm{padding:6px 10px;font-size:.8rem;background:#fff;border-color:#cbd5e1;color:var(--ink)}
+.btn.sm:hover{background:#f8fafc}
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+.metric-box{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:10px 12px;text-align:center}
+.metric-lbl{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.02em}
+.metric-val{font-size:1.25rem;font-weight:700;color:var(--ink);margin:4px 0}
+.hero-score-box{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:2px solid var(--accent);border-radius:10px;padding:16px;text-align:center;margin-bottom:14px}
+.hero-score-val{font-size:2.2rem;font-weight:900;color:var(--accent);margin:6px 0}
+.checklist-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.checklist-item:last-child{border-bottom:none}
+.ad-box{width:100%;max-width:960px;margin:16px auto;text-align:center;overflow:hidden;min-height:100px}
+.ad-box.ad-top{min-height:90px}
+.ad-box.ad-mid{min-height:250px}
+.ad-box.ad-bottom{min-height:280px;margin:24px auto 16px}
+.ad-box ins{display:block;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--line);padding:10px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-item h3{margin:0 0 4px;font-size:.95rem;color:var(--ink)}
+.faq-item p{margin:0;font-size:.88rem;color:var(--muted);line-height:1.5}
+.notice{background:#eff6ff;border-color:#bfdbfe;font-size:.86rem;color:#1e40af}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px;font-style:italic}
+.footer{text-align:center;padding:22px 14px 28px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);margin-top:20px}
+.footer a{color:var(--accent);text-decoration:none;margin:0 6px}
+.footer a:hover{text-decoration:underline}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:8px 16px;border-radius:8px;font-size:.85rem;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999}
+.toast.show{opacity:1}
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">Under maintenance</span>
-  <h1>Home Buying &amp; Down Payment Calculator</h1>
-  <p>This tool is temporarily offline. We found that the previous version did not work the way it was described, so we took it down while we rebuild it properly.</p>
-  <p>Please check back later.</p>
-  <p><a href="https://enjoy-onepage.com/">Browse our other free tools</a></p>
+
+<header class="header">
+  <h1>Home Buying Readiness Calculator</h1>
+  <div class="header-sub">Mortgage Qualification, 28/36 DTI &amp; Cash Reserves Diagnostic</div>
+</header>
+
+<main class="wrap">
+  <!-- ADSENSE START: top -->
+  <div class="ad-box ad-top">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3824727725" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: top -->
+
+  <div class="grid2">
+    <!-- Income, Savings & Property Inputs -->
+    <section class="card" aria-labelledby="inputs-h">
+      <h2 id="inputs-h">🏡 Income &amp; Target Home</h2>
+
+      <div class="form-grid">
+        <div>
+          <label for="annualIncome" class="lbl">Gross Annual Household Income ($)</label>
+          <input type="number" id="annualIncome" class="input" value="110000" min="20000" step="5000">
+          <div class="src" style="margin:2px 0 0">Before taxes and withholdings</div>
+        </div>
+        <div>
+          <label for="targetHomePrice" class="lbl">Target Home Purchase Price ($)</label>
+          <input type="number" id="targetHomePrice" class="input" value="400000" min="50000" step="10000">
+        </div>
+      </div>
+
+      <h2 style="font-size:1.15rem;margin:18px 0 10px">💵 Cash Savings &amp; Monthly Debts</h2>
+      <div class="form-grid">
+        <div>
+          <label for="liquidSavings" class="lbl">Total Available Liquid Cash ($)</label>
+          <input type="number" id="liquidSavings" class="input" value="70000" min="5000" step="2500">
+          <div class="src" style="margin:2px 0 0">Down payment + closing + emergency</div>
+        </div>
+        <div>
+          <label for="monthlyDebt" class="lbl">Monthly Non-Housing Debts ($/mo)</label>
+          <input type="number" id="monthlyDebt" class="input" value="550" min="0" step="50">
+          <div class="src" style="margin:2px 0 0">Auto loans, student loans, cards</div>
+        </div>
+      </div>
+
+      <h2 style="font-size:1.15rem;margin:18px 0 10px">🏛️ Financing &amp; Credit Profile</h2>
+      <div class="form-grid">
+        <div>
+          <label for="downPaymentCash" class="lbl">Down Payment Allocation ($)</label>
+          <input type="number" id="downPaymentCash" class="input" value="48000" min="5000" step="2500">
+          <div id="downPaymentPctLbl" class="src" style="margin:2px 0 0">12.0% of home purchase price</div>
+        </div>
+        <div>
+          <label for="creditScoreTier" class="lbl">Credit Score Tier</label>
+          <select id="creditScoreTier" class="input">
+            <option value="760" selected>740+ (Excellent / Lowest Rates)</option>
+            <option value="700">680 - 739 (Good)</option>
+            <option value="650">620 - 679 (Fair / Conventional Minimum)</option>
+            <option value="600">&lt; 620 (Challenging / FHA Consideration)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+        <button type="button" id="btnExportCsv" class="btn sm">⬇ Export CSV</button>
+        <button type="button" id="btnExportJson" class="btn sm">⬇ Export Backup</button>
+        <button type="button" id="btnResetStandard" class="btn sm">Reset to First-Time Buyer</button>
+      </div>
+    </section>
+
+    <!-- Underwriting Readiness & Checklist -->
+    <section class="card" aria-labelledby="readiness-h">
+      <h2 id="readiness-h">🎯 Mortgage Readiness Diagnostic</h2>
+
+      <div class="hero-score-box">
+        <div class="metric-lbl" style="color:var(--muted)">Overall Readiness Score</div>
+        <div id="resScorePct" class="hero-score-val">88 / 100</div>
+        <div id="resVerdictStatus" style="font-size:.9rem;font-weight:700;color:var(--ok)">🟢 Ready for Pre-Approval</div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="metric-lbl">Front-End DTI (Housing)</div>
+          <div id="resFrontDti" class="metric-val" style="color:var(--accent)">27.8%</div>
+          <div class="src" style="margin:0">Guideline: ≤ 28%</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-lbl">Back-End DTI (Total Debt)</div>
+          <div id="resBackDti" class="metric-val" style="color:var(--ink)">33.8%</div>
+          <div class="src" style="margin:0">Guideline: ≤ 36%</div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="metric-lbl">Estimated Monthly PITI</div>
+          <div id="resMonthlyPiti" class="metric-val" style="color:var(--ink)">$2,548 / mo</div>
+          <div class="src" style="margin:0">Mortgage + Tax + Ins + PMI</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-lbl">Post-Closing Reserves</div>
+          <div id="resCashReserve" class="metric-val" style="color:var(--ok)">$10,000</div>
+          <div id="resMonthsReserve" class="src" style="margin:0">~3.9 months cushion</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:.95rem;margin:16px 0 8px">📋 Underwriter Feasibility Checklist</h3>
+      <div id="checkDtiFront" class="checklist-item">
+        <span>✅</span>
+        <span><strong>Front-End DTI:</strong> Housing cost is within the 28% safe threshold.</span>
+      </div>
+      <div id="checkDtiBack" class="checklist-item">
+        <span>✅</span>
+        <span><strong>Back-End DTI:</strong> Total monthly debt is below the 36% conforming benchmark.</span>
+      </div>
+      <div id="checkPmi" class="checklist-item">
+        <span>⚠️</span>
+        <span><strong>PMI Notice:</strong> Down payment is under 20% (~$140/mo PMI estimated).</span>
+      </div>
+      <div id="checkClosing" class="checklist-item">
+        <span>✅</span>
+        <span><strong>Closing Costs &amp; Cash Buffer:</strong> Healthy liquid reserves remain after closing.</span>
+      </div>
+
+      <div style="margin-top:16px">
+        <button type="button" id="btnShareCalc" class="btn sm" style="width:100%">🔗 Share Readiness Report</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ADSENSE START: mid -->
+  <div class="ad-box ad-mid">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="1186914926" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: mid -->
+
+  <!-- Educational Guide -->
+  <section class="card" aria-labelledby="guide-h">
+    <h2 id="guide-h">📖 The Golden Rules of Mortgage Underwriting Readiness</h2>
+    <p>Pre-qualification from an online lender does not mean you are truly financially ready for 30 years of property ownership:</p>
+    <ul>
+      <li><strong>The 28/36 Qualifying Standard:</strong> Conforming Fannie Mae and Freddie Mac loans evaluate two critical ratios: your front-end housing expense ratio (Principal, Interest, Taxes, Insurance) should not exceed 28% of gross income, and total back-end debt should not exceed 36%.</li>
+      <li><strong>Closing Costs and Prepaid Escrows:</strong> Many buyers save exactly their down payment and are blindsided by 2% to 4% in mandatory closing fees ($8,000 to $16,000 on a $400k home) covering appraisal, title insurance, loan origination, and property tax prepaids.</li>
+      <li><strong>Post-Closing Reserve Cushion:</strong> Never drain your bank accounts to zero on closing day. Heating systems fail, roofs leak, and unexpected moves occur. Retaining at least 3 months of emergency PITI cushion protects against immediate foreclosure risk.</li>
+    </ul>
+    <p class="src">References: Consumer Financial Protection Bureau (CFPB) What is a Debt-to-Income Ratio; Fannie Mae Selling Guide Underwriting Standards.</p>
+  </section>
+
+  <section class="card" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">❓ Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>What is the 28/36 Debt-to-Income (DTI) rule?</h3><p>Lenders prefer that your housing costs (PITI) do not exceed 28% of gross monthly income (front-end DTI), and total debt obligations including cars and loans do not exceed 36% (back-end DTI).</p></div>
+    <div class="faq-item"><h3>How much cash should I keep after closing?</h3><p>Lenders and financial planners recommend retaining at least 2 to 3 months of full mortgage payments (PITI) in liquid cash reserves after paying the down payment and closing costs.</p></div>
+    <div class="faq-item"><h3>What credit score is required to buy a house?</h3><p>Conventional mortgages typically require a minimum 620 credit score (740+ for prime rates). FHA loans allow scores as low as 580 with a 3.5% down payment.</p></div>
+    <div class="faq-item"><h3>Is my sensitive personal financial information protected?</h3><p>Yes. All income, credit tiers, and debt calculations run 100% client-side inside your web browser. No financial data is ever transmitted to servers or credit bureaus.</p></div>
+  </section>
+
+  <section class="card notice" aria-labelledby="note-h">
+    <h2 id="note-h">⚠️ Mortgage Underwriting Notice</h2>
+    <p>This readiness calculator provides educational diagnostic models based on standard qualifying criteria. It does not constitute a formal loan estimate, commitment to lend, or pre-approval certificate.</p>
+  </section>
 </main>
+
+<!-- ADSENSE START: bottom -->
+<div class="ad-box ad-bottom">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3416334507" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: bottom -->
+
+<footer class="footer">
+  <p>Free Home Buying Readiness Calculator · 100% private and client-side.</p>
+  <p><a href="/disclaimer.html">Disclaimer</a> | <a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
+</footer>
+
+<div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- LOGIC START -->
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'us_home_buying_state';
+
+  var state = {
+    income: 110000,
+    price: 400000,
+    savings: 70000,
+    debt: 550,
+    downPayment: 48000,
+    credit: 760
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  function showToast(msg) {
+    var toast = $('global-ux-toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._tid);
+    toast._tid = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  }
+
+  function loadState() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        var parsed = JSON.parse(saved);
+        if (parsed && typeof parsed.income === 'number') {
+          state = Object.assign(state, parsed);
+        }
+      }
+    } catch (e) {}
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function calculateMonthlyPI(principal, annualRate) {
+    var r = (annualRate / 100) / 12;
+    var n = 360;
+    if (r === 0) return principal / n;
+    return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function calculate() {
+    var grossMonthly = Math.max(1, state.income / 12);
+    var downPct = state.price > 0 ? (state.downPayment / state.price) * 100 : 0;
+    $('downPaymentPctLbl').textContent = downPct.toFixed(1) + '% of home purchase price';
+
+    // Mortgage interest rate based on credit score tier
+    var interestRate = 6.5;
+    if (state.credit < 620) interestRate = 7.5;
+    else if (state.credit < 680) interestRate = 7.1;
+    else if (state.credit < 740) interestRate = 6.75;
+    else interestRate = 6.5;
+
+    var loanAmount = Math.max(0, state.price - state.downPayment);
+    var monthlyPI = calculateMonthlyPI(loanAmount, interestRate);
+
+    // Property Tax ~1.2%, Home Insurance ~$150/mo, PMI if down < 20% (~0.5% of loan)
+    var monthlyTax = (state.price * 0.012) / 12;
+    var monthlyIns = 150;
+    var monthlyPmi = downPct < 20 ? (loanAmount * 0.005) / 12 : 0;
+
+    var totalPiti = monthlyPI + monthlyTax + monthlyIns + monthlyPmi;
+
+    // DTI Ratios
+    var frontDti = (totalPiti / grossMonthly) * 100;
+    var backDti = ((totalPiti + state.debt) / grossMonthly) * 100;
+
+    // Closing costs ~3% of purchase price
+    var closingCosts = state.price * 0.03;
+    var postClosingCash = state.savings - (state.downPayment + closingCosts);
+    var reserveMonths = totalPiti > 0 ? postClosingCash / totalPiti : 0;
+
+    // Scoring out of 100
+    var score = 100;
+    if (frontDti > 28) score -= Math.min(25, (frontDti - 28) * 2.5);
+    if (backDti > 36) score -= Math.min(25, (backDti - 36) * 2.5);
+    if (downPct < 20) score -= (20 - downPct) * 0.5;
+    if (postClosingCash < 0) score -= 35;
+    else if (reserveMonths < 3) score -= 15;
+    if (state.credit < 680) score -= 15;
+
+    score = Math.max(10, Math.min(99, Math.round(score)));
+
+    // Update DOM
+    $('resScorePct').textContent = score + ' / 100';
+
+    var statusEl = $('resVerdictStatus');
+    if (score >= 80) {
+      statusEl.textContent = '🟢 Strong Mortgage Readiness';
+      statusEl.style.color = 'var(--ok)';
+    } else if (score >= 60) {
+      statusEl.textContent = '🟡 Moderate Readiness / Tight Ratios';
+      statusEl.style.color = 'var(--warn)';
+    } else {
+      statusEl.textContent = '🔴 High Underwriting Risk';
+      statusEl.style.color = 'var(--danger)';
+    }
+
+    $('resFrontDti').textContent = frontDti.toFixed(1) + '%';
+    $('resFrontDti').style.color = frontDti <= 28 ? 'var(--ok)' : (frontDti <= 33 ? 'var(--warn)' : 'var(--danger)');
+
+    $('resBackDti').textContent = backDti.toFixed(1) + '%';
+    $('resBackDti').style.color = backDti <= 36 ? 'var(--ok)' : (backDti <= 43 ? 'var(--warn)' : 'var(--danger)');
+
+    $('resMonthlyPiti').textContent = '$' + Math.round(totalPiti).toLocaleString() + ' / mo';
+
+    var cashEl = $('resCashReserve');
+    cashEl.textContent = (postClosingCash >= 0 ? '$' : '-$') + Math.abs(Math.round(postClosingCash)).toLocaleString();
+    cashEl.style.color = postClosingCash >= (totalPiti * 3) ? 'var(--ok)' : (postClosingCash > 0 ? 'var(--warn)' : 'var(--danger)');
+
+    $('resMonthsReserve').textContent = reserveMonths >= 0 ? '~' + reserveMonths.toFixed(1) + ' months cushion' : 'Cash deficit for closing';
+
+    // Checklist updates
+    $('checkDtiFront').innerHTML = frontDti <= 28 
+      ? '<span>✅</span><span><strong>Front-End DTI:</strong> Housing cost (' + frontDti.toFixed(1) + '%) is within the 28% safe threshold.</span>'
+      : '<span>⚠️</span><span><strong>Front-End DTI Elevated:</strong> Housing cost is ' + frontDti.toFixed(1) + '% (target ≤ 28%).</span>';
+
+    $('checkDtiBack').innerHTML = backDti <= 36
+      ? '<span>✅</span><span><strong>Back-End DTI:</strong> Total debt (' + backDti.toFixed(1) + '%) is below the 36% conforming benchmark.</span>'
+      : '<span>⚠️</span><span><strong>Back-End DTI High:</strong> Total debt ratio is ' + backDti.toFixed(1) + '% (strict max 43%).</span>';
+
+    $('checkPmi').innerHTML = downPct >= 20
+      ? '<span>✅</span><span><strong>20%+ Down Payment:</strong> No private mortgage insurance (PMI) required.</span>'
+      : '<span>ℹ️</span><span><strong>PMI Required:</strong> ' + downPct.toFixed(1) + '% down requires ~$ ' + Math.round(monthlyPmi) + '/mo PMI until 20% equity.</span>';
+
+    $('checkClosing').innerHTML = postClosingCash >= (totalPiti * 3)
+      ? '<span>✅</span><span><strong>Liquid Cushion:</strong> ' + reserveMonths.toFixed(1) + ' months of PITI remaining after closing.</span>'
+      : (postClosingCash >= 0 
+          ? '<span>⚠️</span><span><strong>Low Post-Closing Cash:</strong> Only ' + reserveMonths.toFixed(1) + ' months buffer remains after closing.</span>'
+          : '<span>❌</span><span><strong>Insufficient Cash:</strong> Short by $' + Math.abs(Math.round(postClosingCash)).toLocaleString() + ' to cover closing costs.</span>');
+
+    saveState();
+  }
+
+  function bindInputs() {
+    var fields = [
+      { id: 'annualIncome', key: 'income' },
+      { id: 'targetHomePrice', key: 'price' },
+      { id: 'liquidSavings', key: 'savings' },
+      { id: 'monthlyDebt', key: 'debt' },
+      { id: 'downPaymentCash', key: 'downPayment' },
+      { id: 'creditScoreTier', key: 'credit', isSelect: true }
+    ];
+
+    fields.forEach(function (f) {
+      var el = $(f.id);
+      if (!el) return;
+      el.value = state[f.key];
+      var evt = f.isSelect ? 'change' : 'input';
+      el.addEventListener(evt, function (e) {
+        var v = parseFloat(e.target.value);
+        state[f.key] = isNaN(v) || v < 0 ? 0 : v;
+        calculate();
+      });
+    });
+  }
+
+  $('btnExportCsv').addEventListener('click', function () {
+    var grossMonthly = state.income / 12;
+    var downPct = (state.downPayment / state.price) * 100;
+    var loanAmount = state.price - state.downPayment;
+    var monthlyPI = calculateMonthlyPI(loanAmount, 6.5);
+    var totalPiti = monthlyPI + ((state.price * 0.012) / 12) + 150 + (downPct < 20 ? (loanAmount * 0.005) / 12 : 0);
+    var frontDti = (totalPiti / grossMonthly) * 100;
+    var backDti = ((totalPiti + state.debt) / grossMonthly) * 100;
+
+    var csv = 'Metric,Value\r\n';
+    csv += 'Gross Annual Income,' + state.income + '\r\n';
+    csv += 'Target Home Price,' + state.price + '\r\n';
+    csv += 'Down Payment Amount,' + state.downPayment + ' (' + downPct.toFixed(1) + '%)\r\n';
+    csv += 'Total Liquid Savings,' + state.savings + '\r\n';
+    csv += 'Monthly Non-Housing Debt,' + state.debt + '\r\n';
+    csv += 'Estimated Monthly PITI,' + Math.round(totalPiti) + '\r\n';
+    csv += 'Front-End DTI,' + frontDti.toFixed(1) + '%\r\n';
+    csv += 'Back-End DTI,' + backDti.toFixed(1) + '%\r\n';
+
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'home_buying_readiness_' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Exported CSV diagnostic!');
+  });
+
+  $('btnExportJson').addEventListener('click', function () {
+    var blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'home_buying_backup_' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Exported JSON backup!');
+  });
+
+  $('btnResetStandard').addEventListener('click', function () {
+    if (confirm('Reset to the standard first-time homebuyer profile ($110k income, $400k home, $70k cash)?')) {
+      state = {
+        income: 110000,
+        price: 400000,
+        savings: 70000,
+        debt: 550,
+        downPayment: 48000,
+        credit: 760
+      };
+      bindInputs();
+      calculate();
+      showToast('Reset to first-time buyer profile');
+    }
+  });
+
+  $('btnShareCalc').addEventListener('click', function () {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('https://us-home-buying-readiness.enjoy-onepage.com/').then(function () {
+        showToast('Link copied to clipboard!');
+      });
+    } else {
+      showToast('Share: https://us-home-buying-readiness.enjoy-onepage.com/');
+    }
+  });
+
+  loadState();
+  bindInputs();
+  calculate();
+})();
+</script>
+<!-- LOGIC END -->
+
 </body>
 </html>
